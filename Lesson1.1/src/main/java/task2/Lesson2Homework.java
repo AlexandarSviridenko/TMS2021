@@ -1,3 +1,5 @@
+package task2;
+
 import java.util.stream.IntStream;
 
 public class Lesson2Homework {
