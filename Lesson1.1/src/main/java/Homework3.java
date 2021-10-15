@@ -178,7 +178,7 @@ public class Homework3 {
          */
         public static void printMatrix() {
             // тут пишем логику
-// ЕЩЕ РАБОТАЮ НАД ЭТОЙ ЗАДАЧЕЙ, НЕ ЗАКОНЧЕНА
+
             Scanner scanner = new Scanner(System.in);
             int v,g;
             v = scanner.nextInt();
@@ -222,5 +222,3 @@ public class Homework3 {
             }
         }
     }
-
-}
