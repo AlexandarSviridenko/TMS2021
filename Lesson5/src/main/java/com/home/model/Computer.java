@@ -5,13 +5,19 @@ import java.util.Scanner;
 
 public class Computer {
 
-    public boolean brooken_flag;
-    private String processor = "процессор";
-    private String ram = "оперативка";
-    private String hdd = "жесткий диск";
-    private int resource = 0;
-    //private int resource="ресурс полных циклов работы (включений/выключений)";
+    public boolean brookenFlag;
+    private String processor;
+    private String ram;
+    private String hdd;
+    private int resource;
 
+    public Computer(boolean brookenFlag, String processor, String ram, String hdd, int resource) {
+        this.brookenFlag = brookenFlag;
+        this.processor = processor;
+        this.ram = ram;
+        this.hdd = hdd;
+        this.resource = resource;
+    }
 
     public void info() {
         System.out.println("комплектующие " + processor);
@@ -23,16 +29,16 @@ public class Computer {
     public void on() {
         System.out.println("Внимание! Введите 0 или 1");
         Scanner scanner = new Scanner(System.in);
-        int a = scanner.nextInt();
-        java.util.Random random = new java.util.Random();
+        int value = scanner.nextInt();
+        Random random = new Random();
         int i = random.nextInt(2);
         System.out.println(i);
-        if (a != i) {
+        if (value != i) {
             off();
             resource++;
         } else {
             System.out.println("Компьютер сгорел");
-            brooken_flag = true;
+            brookenFlag = true;
             //сгорел
         }
     }
@@ -42,6 +48,7 @@ public class Computer {
         System.out.println("Компьютер выключен");
     }
 }
+
 
 //как и где прописать условие повторного включения
 
