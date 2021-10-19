@@ -89,7 +89,7 @@ public class Lesson3Homework {
         // тут пишем логику
 
 
-        if (4 < (count) && (count) < 21) {
+        if (count > 4 && count < 21) {
             System.out.println(count + " программистов");
         } else if (((count) == 1) && ((count % 10) == 1)) {
             System.out.println(count + " программист");

@@ -1,13 +1,47 @@
-//package task6;
-//
-//public class MilitaryOffice {
-//
-//    public PersonRegistry(String name, int age,String gender, String adress) {
-//        this.name = name;
-//        this.age = age;
-//        this.gender= gender;
-//        this.adress=adress;
-//    }
+package task6;
+
+public class MilitaryOffice {
+
+    public static void PersonRegistry() {
+
+        int ageSolders1 = 18;
+        int ageSolders2 = 27;
+        String genderSolders = "man";
+        String adressSolders = "Minsk";
+        int ageSolders3 = 25;
+        int ageSolders4 = 27;
+        String nameSolders = "Саша";
+
+
+        public void solders1 () {
+            Person solders1 = new Person();
+            if (Person.age >= ageSolders1 && Person.age <= ageSolders2 && Person.gender == genderSolders) {
+                System.out.println(Person.name);
+            }
+        }
+        public void solders2 () {
+            Person solders2 = new Person();
+            if (Person.adress == adressSolders) {
+                System.out.println(Person.name)
+            }
+        }
+        public void solders3 () {
+            Person solders3 = new Person();
+            if (Person.age >= ageSolders3 && Person.age <= ageSolders4 && Person.gender == genderSolders) {
+                System.out.println(Person.name);
+            }
+        }
+        public void solders4 () {
+            Person solders4 = new Person();
+            if (Person.name == nameSolders) {
+                System.out.println(Person.name)
+
+
+//            //не понимаю, почему возникает ошибка когда ссылаюсь на переменные? Как решить?
+            }
+        }
+    }
+}
 ////        Домашка: 6 урок
 ////        Необходимо написать военкомат.
 ////        1) Создаем класс военкомат MilitaryOffice
