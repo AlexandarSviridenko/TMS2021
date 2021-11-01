@@ -6,26 +6,23 @@ import java.util.Scanner;
 
 @Getter
 @Setter
-@AllArgsConstructor
-
-
 public class Car {
     //Марка машины, год выпуска, пройденное расстояние
-    public static final engineVolume; // В ЧЕМ ОШИБКА? Не понимаю как вынести глобальную переменную
-    public static Gastank;
+//    public static final engineVolume; // В ЧЕМ ОШИБКА? Не понимаю как вынести глобальную переменную
+    private final Gastank gastank;
+    private final Engine engine;
     private String brand;
     private int yearOfIssue;
     private int mileage;
 
 
-    public Car(String brand, int yearOfIssue, int mileage) {
+    public Car(Gastank gastank, Engine engine, String brand, int yearOfIssue, int mileage) {
+        this.gastank = gastank;
+        this.engine = engine;
         this.brand = brand;
         this.yearOfIssue = yearOfIssue;
         this.mileage = mileage;
     }
-
-    Engine engine = new Engine;  // Так можно было сделать? Не нравится как теперь выглядит мэйн
-    Gastank gastank = new Gastank;
 
     static final class Engine {
 
@@ -55,9 +52,12 @@ public class Car {
         System.out.println("Заведите машину. Для этого нажмите 1");
         Scanner console = new Scanner(System.in);
         int oncar = console.nextInt();
-        if (oncar == 1 && gastank.fuel > 0) {   //ПОЧЕМУ НЕ МОГУ ДОСТУЧАТЬСЯ ДО ПЕРЕМЕННОЙ?Объект создан в main или в даном классе так же нужно создавать?
+        if (oncar == 1 && gastank.fuel > 0) {
             System.out.println("Машина завелась");
             drive();
+        } else if (gastank.fuel == 0) {
+            buyFuel();
+            on();
         } else {
             System.out.println("Выбрано неверное число");
             on();
@@ -75,12 +75,13 @@ public class Car {
         int offcar = console.nextInt();
         if (offcar == 0) {
             System.out.println("Машина заглушена");
+            mileage++;
+            gastank.fuel = gastank.fuel - 1;
+            on();
         } else {
             System.out.println("Выбрано неверное число");
             off();
         }
-        mileage++;
-        gastank.fuel--;
     }
 
     public void buyFuel() {
@@ -89,7 +90,7 @@ public class Car {
         int buyFuel = console.nextInt();
         if (buyFuel <= gastank.gasTankVolume - gastank.fuel) {
             gastank.fuel = gastank.fuel + buyFuel;
-            System.out.println("Вы залили в бак:" + buyFuel + "В баке теперь:" + gastank.fuel);
+            System.out.println("Вы залили в бак:" + buyFuel + " В баке теперь:" + gastank.fuel);
         } else {
             System.out.println("Вы не можете столько залить");
             buyFuel();
