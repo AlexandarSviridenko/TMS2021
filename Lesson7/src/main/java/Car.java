@@ -1,94 +1,104 @@
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Scanner;
 
+@Getter
+@Setter
 public class Car {
     //Марка машины, год выпуска, пройденное расстояние
+//    public static final engineVolume; // В ЧЕМ ОШИБКА? Не понимаю как вынести глобальную переменную
+    private final Gastank gastank;
+    private final Engine engine;
     private String brand;
     private int yearOfIssue;
     private int mileage;
 
-    public Car(String brand, int yearOfIssue, int mileage) {
+
+    public Car(Gastank gastank, Engine engine, String brand, int yearOfIssue, int mileage) {
+        this.gastank = gastank;
+        this.engine = engine;
         this.brand = brand;
         this.yearOfIssue = yearOfIssue;
         this.mileage = mileage;
     }
 
-    static class Engine {
+    static final class Engine {
 
         private int engineVolume;
 
         public Engine(int engineVolume) {
             this.engineVolume = engineVolume;
         }
-
-        public void info() {
-            System.out.println("Модель" + brand + "Год выпуска" + yearOfIssue + "Километраж" + mileage);
-        }
-
-        public void on() {
-            Gastank fuel = new Gastank();
-            System.out.println("Заведите машину. Для этого нажмите 1");
-            Scanner console = new Scanner(System.in);
-            int oncar = console.nextInt();
-            if (oncar == 1 && fuel.fuel > 0) {
-                System.out.println("Машина завелась");
-                drive();
-            } else {
-                System.out.println("Выбрано неверное число");
-                on();
-            }
-        }
-
-        public void drive() {
-            System.out.println("Машина едет");
-            off();
-        }
-
-        public void off() {
-            Gastank fuel = new Gastank();
-            System.out.println("Заглушите машину. Для этого нажмите 0");
-            Scanner console = new Scanner(System.in);
-            int offcar = console.nextInt();
-            if (offcar == 0) {
-                System.out.println("Машина заглушена");
-            } else {
-                System.out.println("Выбрано неверное число");
-                off();
-            }
-            mileage++;
-            fuel.fuel--;
-        }
-
     }
-
 
     static class Gastank {
         private int fuel;
         private int gasTankVolume;
-        private int needfuel;
+
 
         public Gastank(int fuel, int gasTankVolume) {
             this.fuel = fuel;
             this.gasTankVolume = gasTankVolume;
         }
+    }
 
+    public void infoStart() {
+        System.out.println("Модель" + brand + "Год выпуска" + yearOfIssue + "Километраж" + mileage);
+    }
 
-        public void buyFuel() {
-            System.out.println("Ваш объем бака:" + gasTankVolume + "  На данный момент в баке находится:" + fuel + "Выбирите сколько топлива залить:");
-            Scanner console = new Scanner(System.in);
-            int buyFuel = console.nextInt();
-            if (buyFuel <= gasTankVolume - fuel) {
-                fuel = fuel + buyFuel;
-                System.out.println("Вы залили в бак:" + buyFuel + "В баке теперь:" + fuel);
-            } else {
-                System.out.println("Вы не можете столько залить");
-                buyFuel();
-            }
+    public void on() {
+        System.out.println("Заведите машину. Для этого нажмите 1");
+        Scanner console = new Scanner(System.in);
+        int oncar = console.nextInt();
+        if (oncar == 1 && gastank.fuel > 0) {
+            System.out.println("Машина завелась");
+            drive();
+        } else if (gastank.fuel == 0) {
+            buyFuel();
+            on();
+        } else {
+            System.out.println("Выбрано неверное число");
+            on();
         }
     }
 
-    public void info1() {
-        Gastank fuel = new Gastank;
-        System.out.println(brand + yearOfIssue + "Пройдено километров за все время" + mileage + "Объем бензобака" + fuel.gasTankVolume + "Осталось топлива" + fuel.fuel);
+    public void drive() {
+        System.out.println("Машина едет");
+        off();
+    }
+
+    public void off() {
+        System.out.println("Заглушите машину. Для этого нажмите 0");
+        Scanner console = new Scanner(System.in);
+        int offcar = console.nextInt();
+        if (offcar == 0) {
+            System.out.println("Машина заглушена");
+            mileage++;
+            gastank.fuel = gastank.fuel - 1;
+            on();
+        } else {
+            System.out.println("Выбрано неверное число");
+            off();
+        }
+    }
+
+    public void buyFuel() {
+        System.out.println("Ваш объем бака:" + gastank.gasTankVolume + "  На данный момент в баке находится:" + gastank.fuel + "Выбирите сколько топлива залить:");
+        Scanner console = new Scanner(System.in);
+        int buyFuel = console.nextInt();
+        if (buyFuel <= gastank.gasTankVolume - gastank.fuel) {
+            gastank.fuel = gastank.fuel + buyFuel;
+            System.out.println("Вы залили в бак:" + buyFuel + " В баке теперь:" + gastank.fuel);
+        } else {
+            System.out.println("Вы не можете столько залить");
+            buyFuel();
+        }
+    }
+
+    public void infoEnd() {
+        System.out.println(brand + yearOfIssue + "Пройдено километров за все время" + mileage + "Объем бензобака" + gastank.gasTankVolume + "Осталось топлива" + gastank.fuel);
     }
 }
 
