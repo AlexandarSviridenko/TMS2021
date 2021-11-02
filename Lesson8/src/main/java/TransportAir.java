@@ -7,5 +7,21 @@ public class TransportAir extends Transport {
         this.wingLength = wingLength;
         this.minRunWay = minRunWay;
     }
+
+    public int getWingLength() {
+        return wingLength;
+    }
+
+    public void setWingLength(int wingLength) {
+        this.wingLength = wingLength;
+    }
+
+    public int getMinRunWay() {
+        return minRunWay;
+    }
+
+    public void setMinRunWay(int minRunWay) {
+        this.minRunWay = minRunWay;
+    }
 }
 
